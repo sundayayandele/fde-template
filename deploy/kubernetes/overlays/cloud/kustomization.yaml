@@ -1,0 +1,17 @@
+# Managed Kubernetes (EKS, AKS, GKE). Set the image to your registry with
+#   cd deploy/kubernetes/overlays/cloud && kustomize edit set image fde-service=<registry>/fde-service:<tag>
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+  - ingress.yaml
+images:
+  - name: fde-service
+    newName: REGISTRY/fde-service
+    newTag: "0.1.0"
+patches:
+  - target: {kind: Deployment, name: fde-service}
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/imagePullPolicy
+        value: Always

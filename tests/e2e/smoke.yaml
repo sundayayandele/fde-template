@@ -1,0 +1,23 @@
+# End-to-end smoke checks run by scripts/smoke_test.py against a live service
+# (local process, Docker/Podman/Rancher Desktop, Kubernetes or cloud).
+checks:
+  - name: liveness
+    path: /health/live
+    expect_keys: [status]
+  - name: readiness
+    path: /health/ready
+    expect_keys: [status, version]
+  - name: metrics exposed
+    path: /metrics/
+    expect_contains: http_requests_total
+  - name: hello endpoint
+    exercise: true          # depends on a learner TODO; skipped in starter repos by default
+    method: POST
+    path: /api/v1/hello
+    json: {name: "FDE learner"}
+    expect_keys: [message]
+  - name: input validation
+    method: POST
+    path: /api/v1/hello
+    json: {name: ""}
+    expect_status: 422

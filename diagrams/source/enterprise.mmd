@@ -1,0 +1,20 @@
+%% Enterprise view (TOGAF business and application layers, ArchiMate-style). Replace per phase.
+flowchart TB
+  subgraph Business["Business layer"]
+    actor[Customer team] --> process[Business process supported]
+    process --> outcome[Measured business outcome]
+  end
+  subgraph Application["Application layer"]
+    svc[FDE service API]
+    llm[LLM provider service]
+  end
+  subgraph Technology["Technology layer"]
+    desk[Desktop runtimes: Docker, Podman, Rancher]
+    k8s[Kubernetes / OpenShift]
+    cloud[AWS, Azure, GCP managed containers]
+  end
+  process --> svc
+  svc --> llm
+  svc --> desk
+  svc --> k8s
+  svc --> cloud

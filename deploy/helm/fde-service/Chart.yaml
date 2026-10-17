@@ -1,0 +1,8 @@
+apiVersion: v2
+name: fde-service
+description: FDE series service. Same security posture as the Kustomize base; values for desktops, clouds and OpenShift.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+maintainers:
+  - name: Sunday Ayandele

@@ -1,0 +1,7 @@
+%% Logical view: components and data flow, independent of technology. Replace per phase.
+flowchart LR
+  client[Client] --> api[API layer: validation, routing]
+  api --> domain[Domain logic]
+  domain --> llm[LLM client: provider selection, residency guard]
+  llm --> provider[(LLM provider)]
+  api --> telemetry[Metrics and logs]
