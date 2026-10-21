@@ -1,0 +1,32 @@
+name: evals
+
+# Runs the repo's evaluation suite (evals/run.py) when prompts, models, retrieval or
+# eval data change, and nightly against the live provider. Pull requests use recorded
+# fixtures so they never call a paid API; the nightly run needs MISTRAL_API_KEY.
+on:
+  pull_request:
+    paths: ["src/**", "config/**", "evals/**"]
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Run evals
+        env:
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          EVAL_MODE: ${{ github.event_name == 'pull_request' && 'fixtures' || 'live' }}
+        run: |
+          if [ -f evals/run.py ]; then python evals/run.py --mode "$EVAL_MODE";
+          else echo "No evals/run.py in this repo yet; nothing to run."; fi
