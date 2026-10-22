@@ -4,6 +4,9 @@ All notable changes. Versions follow semantic versioning; the starter repo is re
 
 ## [Unreleased]
 
+### Added
+- `.devcontainer/devcontainer.json` and an "Open in GitHub Codespaces" badge: a ready Python 3.12 environment that runs `make install` on creation.
+
 ## [0.1.0] - 2026-10-13
 
 ### Added

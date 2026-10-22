@@ -1,5 +1,7 @@
 # fde-template
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sundayayandele/fde-template?quickstart=1)
+
 The starting point for every repo in the **Forward Deployed ML Engineer: Zero-to-Hired** series. Each phase repo (`fde-00` to `fde-07`) is created from this template, so all of them share one structure, one quality bar and one deployment matrix: **Docker Desktop, Podman Desktop and Rancher Desktop locally, AWS, Azure and GCP in the cloud**, plus Kubernetes, OpenShift and Helm.
 
 The template runs as-is: a small FastAPI service with health checks, Prometheus metrics, a provider-agnostic LLM client (Mistral by default; OpenAI, DeepSeek, Qwen, Kimi or self-hosted by configuration), and an end-to-end smoke test that every deployment path must pass.
